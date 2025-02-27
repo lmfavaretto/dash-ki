@@ -27,7 +27,7 @@ app.layout = html.Div([
     html.H3("Sazonalidade por Dia da Semana"),
     dcc.Graph(
         df_sazonalidade = df_sazonalidade.rename(columns={df_sazonalidade.columns[0]: "Número de Pedidos"}).reset_index(),
-figure=px.bar(df_sazonalidade, x='Dia da Semana', y="Número de Pedidos",
+figure=px.bar(df_sazonalidade, x='Dia da Semana', y=df_sazonalidade.columns[1])
 
 
                       title="Pedidos por Dia da Semana")
