@@ -12,6 +12,9 @@ df_rfm = pd.read_csv("rfm_matriz.csv")
 # Criar a aplicação Dash
 app = Dash(__name__)
 
+# Primeiro, ajuste o dataframe ANTES do layout
+df_sazonalidade = df_sazonalidade.rename(columns={df_sazonalidade.columns[0]: "Número de Pedidos"}).reset_index()
+
 # Layout do dashboard
 app.layout = html.Div([
     html.H1("Dashboard de Análise de Clientes - Restaurante Ki", style={'textAlign': 'center'}),
@@ -25,10 +28,6 @@ app.layout = html.Div([
     ),
 
     html.H3("Sazonalidade por Dia da Semana"),
-    
-    # Correção aqui: Definição da variável antes de dcc.Graph()
-    df_sazonalidade = df_sazonalidade.rename(columns={df_sazonalidade.columns[0]: "Número de Pedidos"}).reset_index(),
-
     dcc.Graph(
         figure=px.bar(df_sazonalidade, x='Dia da Semana', y="Número de Pedidos",
                       title="Pedidos por Dia da Semana")
